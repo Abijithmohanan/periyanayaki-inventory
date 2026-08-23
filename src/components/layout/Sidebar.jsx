@@ -1,67 +1,48 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Bell, LogOut, Settings as SettingsIcon, ChevronDown } from 'lucide-react';
+import React from 'react';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { LayoutDashboard, Package, Warehouse, Users, Truck, Settings as SettingsIcon, LogOut, BookOpen } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 
-const Navbar = () => {
-  const { user, logout } = useAuth();
-  const navigate = useNavigate();
-  const [menuOpen, setMenuOpen] = useState(false);
-  const menuRef = useRef(null);
+const menuItems = [
+  { label: 'Dashboard', icon: LayoutDashboard, path: '/dashboard' },
+  { label: 'Products', icon: Package, path: '/products' },
+  { label: 'Inventory', icon: Warehouse, path: '/inventory' },
+  { label: 'Buyers', icon: Users, path: '/buyers' },
+  { label: 'Dispatch', icon: Truck, path: '/dispatch' },
+  { label: 'Settings', icon: SettingsIcon, path: '/settings' },
+  { label: 'Catalog', icon: BookOpen, path: '/catalog' },
+];
 
-  useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (menuRef.current && !menuRef.current.contains(e.target)) {
-        setMenuOpen(false);
-      }
-    };
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
+const Sidebar = () => {
+  const { logout } = useAuth();
+  const navigate = useNavigate();
 
   const handleLogout = () => {
     logout();
     navigate('/login');
-    setMenuOpen(false);
-  };
-
-  const handleSettings = () => {
-    navigate('/settings');
-    setMenuOpen(false);
   };
 
   return (
-    <header className="navbar">
-      <div className="navbar-title">Inventory Management System</div>
-      <div className="navbar-actions">
-        <button className="icon-btn" title="Notifications">
-          <Bell size={19} />
-        </button>
-        <div className="navbar-user" ref={menuRef}>
-          <button className="navbar-user-btn" onClick={() => setMenuOpen((o) => !o)}>
-            <span className="avatar">{user?.fullName?.charAt(0) || 'A'}</span>
-            <span className="navbar-user-name">{user?.fullName || 'Admin User'}</span>
-            <ChevronDown size={16} />
-          </button>
-          {menuOpen && (
-            <div className="navbar-menu">
-              <div className="navbar-menu-header">
-                <div className="navbar-menu-name">{user?.fullName || 'Admin User'}</div>
-                <div className="navbar-menu-email">{user?.email || 'admin@periyanayaki.com'}</div>
-              </div>
-              <div className="navbar-menu-divider" />
-              <button className="navbar-menu-item" onClick={handleSettings}>
-                <SettingsIcon size={16} /> Settings
-              </button>
-              <button className="navbar-menu-item danger" onClick={handleLogout}>
-                <LogOut size={16} /> Logout
-              </button>
-            </div>
-          )}
-        </div>
-      </div>
-    </header>
+    <aside className="sidebar">
+      <nav className="sidebar-nav">
+        {menuItems.map((item) => (
+          <NavLink
+            key={item.path}
+            to={item.path}
+            className={({ isActive }) => 'sidebar-link' + (isActive ? ' active' : '')}
+          >
+            <item.icon size={20} />
+            <span>{item.label}</span>
+          </NavLink>
+        ))}
+      </nav>
+
+      <button className="sidebar-logout" onClick={handleLogout}>
+        <LogOut size={20} />
+        <span>Logout</span>
+      </button>
+    </aside>
   );
 };
 
-export default Navbar;
+export default Sidebar;
