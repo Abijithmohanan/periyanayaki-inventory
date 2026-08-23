@@ -2,6 +2,7 @@ import React from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { LayoutDashboard, Package, Warehouse, Users, Truck, Settings as SettingsIcon, LogOut, BookOpen } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
+import minimalLogo from '../../assets/minimal-logo.png';
 
 const menuItems = [
   { label: 'Dashboard', icon: LayoutDashboard, path: '/dashboard' },
@@ -24,6 +25,10 @@ const Sidebar = () => {
 
   return (
     <aside className="sidebar">
+      <div className="sidebar-brand">
+        <img src={minimalLogo} alt="Periyanayaki Kitchen Engineering" className="sidebar-brand-logo" />
+      </div>
+
       <nav className="sidebar-nav">
         {menuItems.map((item) => (
           <NavLink
