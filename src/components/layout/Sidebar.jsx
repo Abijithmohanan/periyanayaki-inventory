@@ -24,11 +24,7 @@ const Sidebar = () => {
 
   return (
     <aside className="sidebar">
-      <div className="sidebar-brand">
-        <h2 className="brand-title">Periyanayaki</h2>
-      </div>
-
-      <nav className="sidebar-nav">
+      <nav className="sidebar-nav" style={{ paddingTop: '24px' }}>
         {menuItems.map((item) => (
           <NavLink
             key={item.path}
