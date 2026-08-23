@@ -25,9 +25,7 @@ const Sidebar = () => {
   return (
     <aside className="sidebar">
       <div className="sidebar-brand">
-        <h2 style={{ fontSize: '1.1rem', fontWeight: 700, margin: 0, color: '#1f2937' }}>
-          Periyanayaki
-        </h2>
+        <h2 className="brand-title">Periyanayaki</h2>
       </div>
 
       <nav className="sidebar-nav">
