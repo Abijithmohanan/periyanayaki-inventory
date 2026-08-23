@@ -1,0 +1,26 @@
+export const initialBuyers = [
+  {
+    id: 1,
+    name: 'Rajesh Kumar',
+    phone: '+91-9876543210',
+    email: 'rajesh.kumar@example.com',
+    product: 'Diesel Water Pump 5HP',
+    quantityPurchased: 1,
+    customerType: 'Retail',
+    paymentStatus: 'Paid',
+    bookingDate: '2024-01-20',
+    comments: 'Regular buyer, good feedback',
+  },
+  {
+    id: 2,
+    name: 'Vijay Agro Traders',
+    phone: '+91-9654321098',
+    email: 'vijay.agro@example.com',
+    product: 'Rotary Tiller Cultivator',
+    quantityPurchased: 2,
+    customerType: 'Wholesale',
+    paymentStatus: 'Partial',
+    bookingDate: '2024-01-19',
+    comments: 'Dealer, weekly orders',
+  },
+];
